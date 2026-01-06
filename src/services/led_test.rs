@@ -40,17 +40,11 @@ pub fn led_test_task() {
     //core task loop
     loop {
         if let Some(msg) = unsafe { msg::get(MSG_QUEUE, 1000) } {
-            let led_mode = msg.payload.get(0);
-            match led_mode {
-                led_mode if led_mode == Some(&(1 as u8)) => {
-                    turn_led_on(&mut led);
-                }
-                led_mode if led_mode == Some(&(0 as u8)) => {
-                    turn_led_off(&mut led);
-                }
-                _ => {
-                    LED_TEST_LOGGER.info("Unknown LED mode received");
-                }
+            let led_mode: bool = msg.payload.downcast_ref::<bool>().map_or(false, |b| *b);
+            if led_mode {
+                turn_led_on(&mut led);
+            } else {
+                turn_led_off(&mut led);
             }
         } else {
             LED_TEST_LOGGER.info("No message received within timeout");

@@ -1,3 +1,5 @@
+use std::any::Any;
+use std::sync::Arc;
 #[derive(Hash, Eq, PartialEq, Clone, Copy, Debug)]
 #[repr(usize)]
 #[allow(dead_code)]
@@ -48,8 +50,8 @@ pub enum MessageType {
     MidCount, //This must be last
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct Message {
     pub msg_type: MessageType,
-    pub payload: Vec<u8>,
+    pub payload: Arc<dyn Any + Send + Sync>,
 }

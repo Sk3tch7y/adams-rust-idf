@@ -1,6 +1,7 @@
 use esp_idf_hal::delay::FreeRtos;
 use log::info;
 mod exec;
+mod fs;
 mod hardware;
 mod logger;
 mod message;

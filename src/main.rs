@@ -1,5 +1,6 @@
 use esp_idf_hal::delay::FreeRtos;
 use log::info;
+use std::sync::Arc;
 mod exec;
 mod hardware;
 mod logger;
@@ -31,7 +32,7 @@ fn main() {
         main_logger.info("Before LED ON publish");
         message::msg::publish(message::message::Message {
             msg_type: message::message::MessageType::MidGeneralPurpose1,
-            payload: vec![1],
+            payload: Arc::new(true),
         });
         main_logger.info("After LED ON publish");
 
@@ -40,7 +41,7 @@ fn main() {
         main_logger.info("Before LED OFF publish");
         message::msg::publish(message::message::Message {
             msg_type: message::message::MessageType::MidGeneralPurpose1,
-            payload: vec![0],
+            payload: Arc::new(false),
         });
         main_logger.info("After LED OFF publish");
         FreeRtos::delay_ms(1000);

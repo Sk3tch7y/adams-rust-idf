@@ -1,3 +1,4 @@
+use esp_idf_hal::sys::esp_vfs_fat_sdmmc_unmount;
 use esp_idf_sys::{
     esp_vfs_littlefs_conf_t, esp_vfs_littlefs_register, esp_vfs_littlefs_unregister, ESP_OK,
 };

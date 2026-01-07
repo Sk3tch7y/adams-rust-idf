@@ -2,7 +2,6 @@ use esp_idf_hal::delay::FreeRtos;
 use log::info;
 use std::sync::Arc;
 mod exec;
-mod fs;
 mod hardware;
 mod logger;
 mod message;
